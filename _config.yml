@@ -1,3 +1,3 @@
 theme: jekyll-theme-cayman
-title: Active Segmentation
-description: Active Segmentation Plugin for ImageJ - GSOC 2017
+title: Active Segmentation — Cell Tracking (GSoC 2020)
+description: Cell-tracking module for the Active Segmentation ImageJ plugin, Google Summer of Code 2020 with INCF

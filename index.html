@@ -2,51 +2,75 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Active Segmentation</title>
+    <title>Active Segmentation — Cell Tracking (GSoC 2020) · Raghavendra Singh Chauhan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Google Summer of Code 2020 with INCF: a cell-tracking module for the Active Segmentation ImageJ plugin, built by Raghavendra Singh Chauhan.">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
   </head>
   <body>
     <section class="page-header">
       <h1 class="project-name">Active Segmentation</h1>
-        <h2 class="project-tagline">Active Segmentation Plugin for ImageJ - GSOC 2020</h2>
-      <a href="https://github.com/Raghavendrapara" class="btn">View on GitHub</a>
-     </section>
+      <h2 class="project-tagline">Cell-tracking module for the Active Segmentation ImageJ plugin · Google Summer of Code 2020</h2>
+      <a href="https://github.com/Raghavendrapara/ACTIVESEGMENTATION/commits/master?author=Raghavendrapara" class="btn">View my commits</a>
+      <a href="https://raghavendrapara.github.io/rc-says/" class="btn">Portfolio &amp; writing</a>
+    </section>
 
     <section class="main-content">
-	<h1>
-<a id="developers" class="anchor" href="#developers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Developers</h1>
 
-<p>Student: <a href="raghavendra0360@gmail.com">Raghavendra Singh Chauhan</a><br>
-Mentor: <a href="dimiterpp@gmail.com">Dimiter Prodanov </a> <a href="sumit.3203@gmail.com">Sumit Kumar Vohra</a><br>
-<h1>
-<a id="organization" class="anchor" href="#organization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Organization:</h1>
+      <h1><a id="people" class="anchor" href="#people" aria-hidden="true"><span class="octicon octicon-link"></span></a>People</h1>
+      <p>
+        Student: <a href="https://raghavendrapara.github.io/rc-says/">Raghavendra Singh Chauhan</a><br>
+        Mentors: Dimiter Prodanov, Sumit Kumar Vohra<br>
+        Organization: <a href="https://www.incf.org">International Neuroinformatics Coordinating Facility (INCF)</a>
+      </p>
 
-<p><a href="http://incf.org">International Neuroinformatics Coordinating Facility</a>   </p>
+      <h1><a id="project" class="anchor" href="#project" aria-hidden="true"><span class="octicon octicon-link"></span></a>The project</h1>
+      <p>
+        ImageJ is a public-domain Java image-processing program used widely in the life sciences.
+        Active Segmentation is a redesign of ImageJ's Trainable Weka Segmentation (TWS). Its core was
+        built during GSoC 2016 and it has been under active development since. It gives users a single
+        interface for combining state-of-the-art image filters with machine-learning methods from the
+        WEKA library, including active learning and multi-instance learning.
+      </p>
 
-<h1>
-<a id="project-description" class="anchor" href="#project-description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project description</h1>
+      <h1><a id="my-work" class="anchor" href="#my-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>What I built (July – September 2020)</h1>
+      <p>My summer was spent adding <strong>cell tracking</strong> to the plugin: following individual cells across the frames of a time-lapse image stack.</p>
 
-<p>Trial.<br>
-ImageJ is a public domain Java image processing program extensively used in life sciences.
-Active Segmentation plugin is the redesign of existing Trainable Weka Segmentation (TWS) of
-ImageJ. The main functionality of the platform was already developed in the context of GSOC
-2016 but the platform is still under development. 
-The Active Segmentation provides generic functionality and user friendly interface so that the user can include the state of the art filters and 
-machine learning frameworks from the WEKA library:
-<ul>
-<li>Active learning.</li>
-<li>Multi-instance learning designed by third party in a robust manner </li>
-</ul>
-In this Google summer of code 
-<br>
- 
-  
+      <h3>Training and annotation GUI</h3>
+      <ul>
+        <li>A tracking-training window showing the previous and next frames side by side, with frame-by-frame navigation.</li>
+        <li>Region-of-interest (ROI) selection with a smoothed wand tool, and labelling of ROIs against cell events (for example, apoptosis).</li>
+        <li>Saving and loading labelled ROIs (as zip archives) and event counters, so ground truth can be reused across sessions.</li>
+      </ul>
+
+      <h3>Tracking backend</h3>
+      <ul>
+        <li>A trellis graph built from the ROIs extracted in each frame, with node definitions for cells.</li>
+        <li>A Viterbi-based search over the trellis to link cells across frames, scored with an inverse-distance log-probability model for cell migration.</li>
+        <li>A tracking manager holding the event matrices (including apoptosis), plus a cell-displacement-variance measure.</li>
+      </ul>
+
+      <h3>Visualisation and hardening</h3>
+      <ul>
+        <li>Track overlays on the image, with the option to display tracks individually.</li>
+        <li>Fixes for canvas flicker, null-pointer exceptions and track colouring, followed by refactoring and documentation of the tracking code.</li>
+      </ul>
+
+      <p>
+        In total: 55 commits.
+        <a href="https://github.com/Raghavendrapara/ACTIVESEGMENTATION/commits/master?author=Raghavendrapara">Browse the commit history</a>
+        or the <a href="https://github.com/Raghavendrapara/ACTIVESEGMENTATION">repository</a>.
+      </p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner">
+          Raghavendra Singh Chauhan · <a href="https://raghavendrapara.github.io/rc-says/">Portfolio</a> · <a href="https://github.com/Raghavendrapara">GitHub</a>
+        </span>
+      </footer>
     </section>
-  
+
   </body>
 </html>
